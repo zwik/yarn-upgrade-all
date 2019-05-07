@@ -8,6 +8,18 @@ This is a command line utility program to upgrade all the packages in your `pack
 yarn add --dev yarn-upgrade-options
 ```
 
+### Installation globally
+```
+yarn global add yarn-upgrade-options
+```
+
+### Installation on Windows
+```
+npm install -g yarn-upgrade-options
+```
+
+:exclamation: Don't use `yarn` to install it on Windows because there is a bug: [yarnpkg/yarn#2224](https://github.com/yarnpkg/yarn/issues/2224).
+
 ## Usage
 ```
 npx yarn-upgrade-options
@@ -23,18 +35,6 @@ Will update packages with exact versioning.
 npx yarn-upgrade-options -T
 ```
 Will update packages with tilde versioning.
-
-## Installation globally
-```
-yarn global add yarn-upgrade-options
-```
-
-### Installation on Windows
-```
-npm install -g yarn-upgrade-options
-```
-
-:exclamation: Don't use `yarn` to install it on Windows because there is a bug: [yarnpkg/yarn#2224](https://github.com/yarnpkg/yarn/issues/2224).
 
 ## How does it work?
 For every package in `package.json`, it runs `yarn add [--dev|--peer] <package-name>`.
