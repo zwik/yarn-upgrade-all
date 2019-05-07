@@ -9,6 +9,11 @@ commander.version(packageJson.version)
   .option('-T, --tilde', 'Install most recent version with the same minor version')
   .parse(process.argv);
 
+if (commander.exact && commander.tilde) {
+  console.log(`Exact and tilde options can't be on, on the same time.`);
+  process.exit(1);
+}
+
 const logError = (message) => {
   console.log(red('[Error]'), `: ${message}`);
 }
@@ -21,22 +26,40 @@ const logSuccess = (message) => {
   console.log(green('[Done]'), `: ${message}`);
 }
 
+const addYarnOptions = (command) => {
+  command = addExact(command);
+  command = addTilde(command);
+  return command;
+}
+
+const addExact = (command) => {
+  if (commander.exact) {
+    return command + ` --exact`;
+  } else {
+    return command;
+  }
+}
+
+const addTilde = (command) => {
+  if (commander.tilde) {
+     return command + ` --tilde`;
+  } else {
+    return command;
+  }
+}
+
 const options = {
-  dependencies: '',
   devDependencies: ' --dev',
   peerDependencies: ' --peer'
 };
 
-let dependencyCommand = ''
-let devDependencyCommand = ''
-let peerDependencyCommand = '';
+let tempCommand = '';
 let command = '';
 for (let element of ['dependencies', 'devDependencies', 'peerDependencies']) {
   if (packageJson[element]) {
     const option = options[element];
     const packages = Object.keys(packageJson[element]);
     let packageList = '';
-
 
     for (let pkg of packages) {
       if (packageList.length) {
@@ -47,53 +70,21 @@ for (let element of ['dependencies', 'devDependencies', 'peerDependencies']) {
     }
 
     if (element === 'dependencies') {
-      dependencyCommand = `yarn add ${packageList}`;
-      if (commander.exact) {
-        dependencyCommand += ` --exact`;
-      }
-      if (commander.tilde) {
-        dependencyCommand += ` --tilde`
-      }
+      tempCommand = `yarn add ${packageList}`;
+      tempCommand = addYarnOptions(tempCommand);
     }
-    if (element === 'devDependencies') {
-      devDependencyCommand = `yarn add ${packageList} --dev`;
-      if (commander.exact) {
-        devDependencyCommand += ` --exact`;
-      }
-      if (commander.tilde) {
-        devDependencyCommand += ` --tilde`
-      }
+    if (element === 'devDependencies' || element == 'peerDependencies') {
+      tempCommand = `yarn add ${packageList} ${option}`;
+      tempCommand = addYarnOptions(tempCommand);
     }
-    if (element === 'peerDependencies') {
-      peerDependencyCommand = `yarn add ${packageList} --peer`;
-      if (commander.exact) {
-        peerDependencyCommand += ` --exact`;
-      }
-      if (commander.tilde) {
-        peerDependencyCommand += ` --tilde`
-      }
-    }
-  }
-}
 
-if (dependencyCommand.length) {
-  command += dependencyCommand;
-}
-if (devDependencyCommand.length) {
-  if (command.length) {
-    command += ` && ${devDependencyCommand}`;
-  } else {
-    command += devDependencyCommand;
+    if (command.length) {
+      command += ` && ${tempCommand}`;
+    } else {
+      command += tempCommand;
+    }
   }
 }
-if (peerDependencyCommand.length) {
-  if (command.length) {
-    command += ` && ${peerDependencyCommand}`;
-  } else {
-    command += peerDependencyCommand;
-  }
-}
-console.log(command);
 
 try {
   logInfo(command);
