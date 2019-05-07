@@ -1,5 +1,5 @@
 const commander = require('commander');
-const {blue, green, red} = require('kleur');
+const { blue, green, red } = require('kleur');
 const childProcess = require('child_process');
 
 const packageJson = require('./package.json');
