@@ -35,35 +35,42 @@ for (let element of ['dependencies', 'devDependencies', 'peerDependencies']) {
   if (packageJson[element]) {
     const option = options[element];
     const packages = Object.keys(packageJson[element]);
+    let packageList = '';
 
 
     for (let pkg of packages) {
-      if (element === 'dependencies') {
-        dependencyCommand = `yarn add ${pkg}`;
-        if (commander.exact) {
-          dependencyCommand += ` --exact`;
-        }
-        if (commander.tilde) {
-          dependencyCommand += ` --tilde`
-        }
+      if (packageList.length) {
+        packageList += ` ${pkg}`;
+      } else {
+        packageList = pkg;
       }
-      if (element === 'devDependencies') {
-        devDependencyCommand = `yarn add ${pkg} --dev`;
-        if (commander.exact) {
-          devDependencyCommand += ` --exact`;
-        }
-        if (commander.tilde) {
-          devDependencyCommand += ` --tilde`
-        }
+    }
+
+    if (element === 'dependencies') {
+      dependencyCommand = `yarn add ${packageList}`;
+      if (commander.exact) {
+        dependencyCommand += ` --exact`;
       }
-      if (element === 'peerDependencies') {
-        peerDependencyCommand = `yarn add ${pkg} --peer`;
-        if (commander.exact) {
-          peerDependencyCommand += ` --exact`;
-        }
-        if (commander.tilde) {
-          peerDependencyCommand += ` --tilde`
-        }
+      if (commander.tilde) {
+        dependencyCommand += ` --tilde`
+      }
+    }
+    if (element === 'devDependencies') {
+      devDependencyCommand = `yarn add ${packageList} --dev`;
+      if (commander.exact) {
+        devDependencyCommand += ` --exact`;
+      }
+      if (commander.tilde) {
+        devDependencyCommand += ` --tilde`
+      }
+    }
+    if (element === 'peerDependencies') {
+      peerDependencyCommand = `yarn add ${packageList} --peer`;
+      if (commander.exact) {
+        peerDependencyCommand += ` --exact`;
+      }
+      if (commander.tilde) {
+        peerDependencyCommand += ` --tilde`
       }
     }
   }
