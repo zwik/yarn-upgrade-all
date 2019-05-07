@@ -6,6 +6,9 @@
   "repository": "https://github.com/zwik/yarn-upgrade-options.git",
   "author": "Marcel van den Bosch <m.v.d.bosch@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "yarn-upgrade-all": "./index.js"
+  },
   "scripts": {
     "lint": "eslint ."
   },
