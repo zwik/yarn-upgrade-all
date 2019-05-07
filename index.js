@@ -1,4 +1,6 @@
+#!/usr/bin/env node
 /* eslint-disable no-console */
+
 const commander = require('commander');
 const { blue, green, red } = require('kleur');
 const childProcess = require('child_process');
