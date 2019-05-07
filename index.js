@@ -5,9 +5,13 @@ const childProcess = require('child_process');
 const packageJson = require('./package.json');
 
 commander.version(packageJson.version)
-  .option('-E, --exact', 'Install exact version')
-  .option('-T, --tilde', 'Install most recent version with the same minor version')
-  .parse(process.argv);
+  .option('-E, --exact', 'install exact version')
+  .option('-T, --tilde', 'install most recent version with the same minor version')
+commander.on('--help', () => {
+  console.log('');
+  console.log('When no options are given, packages are installed with a caret (^).')
+});
+commander.parse(process.argv);
 
 if (commander.exact && commander.tilde) {
   console.log(`Exact and tilde options can't be on, on the same time.`);
@@ -81,7 +85,7 @@ for (let element of ['dependencies', 'devDependencies', 'peerDependencies']) {
     if (command.length) {
       command += ` && ${tempCommand}`;
     } else {
-      command += tempCommand;
+      command = tempCommand;
     }
   }
 }
