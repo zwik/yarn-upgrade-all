@@ -6,7 +6,7 @@
   "author": "Marcel van den Bosch <m.v.d.bosch@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint index.js"
+    "lint": "eslint ."
   },
   "dependencies": {
     "commander": "^2.20.0",
