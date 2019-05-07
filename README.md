@@ -1,4 +1,4 @@
-# yarn-upgrade-options
+# @zwik/yarn-upgrade-all
 Based on [yarn-upgrade-all](https://www.npmjs.com/package/yarn-upgrade-all) which is very slow and was missing some functionality, such as exact/tilde/caret versioning, I've decided to rework it a bit resulting in this packages.
 
 This is a command line utility program to upgrade all the packages in your `package.json` to the latest version
@@ -7,34 +7,34 @@ This is a command line utility program to upgrade all the packages in your `pack
 
 ## Installation
 ```
-yarn add --dev yarn-upgrade-options
+yarn add --dev @zwik/yarn-upgrade-all
 ```
 
 ### Installation globally
 ```
-yarn global add yarn-upgrade-options
+yarn global add @zwik/yarn-upgrade-all
 ```
 
 ### Installation on Windows
 ```
-npm install -g yarn-upgrade-options
+npm install -g @zwik/yarn-upgrade-all
 ```
 
 :exclamation: Don't use `yarn` to install it on Windows because there is a bug: [yarnpkg/yarn#2224](https://github.com/yarnpkg/yarn/issues/2224).
 
 ## Usage
 ```
-npx yarn-upgrade-options
+npx @zwik/yarn-upgrade-all
 ```
 Will update packages with caret `^` versioning.
 
 ```
-npx yarn-upgrade-options -E
+npx @zwik/yarn-upgrade-all -E
 ```
 Will update packages with exact versioning.
 
 ```
-npx yarn-upgrade-options -T
+npx @zwik/yarn-upgrade-all -T
 ```
 Will update packages with tilde versioning.
 
