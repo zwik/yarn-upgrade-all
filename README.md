@@ -1,4 +1,6 @@
 # yarn-upgrade-options
+Based on [yarn-upgrade-all](https://www.npmjs.com/package/yarn-upgrade-all) which is very slow and was missing some functionality, such as exact/tilde/caret versioning, I've decided to rework it a bit resulting in this packages.
+
 This is a command line utility program to upgrade all the packages in your `package.json` to the latest version
 (potentially upgrading packages across major versions).
 
