@@ -1,6 +1,6 @@
 {
   "name": "@zwik/yarn-upgrade-all",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "This is a command line utility program to upgrade all the packages in your package.json to the latest version (potentially upgrading packages across major versions).",
   "main": "index.js",
   "repository": "https://github.com/zwik/yarn-upgrade-options.git",
