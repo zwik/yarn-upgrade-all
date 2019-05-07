@@ -1,4 +1,5 @@
 const commander = require('commander');
+const {blue, green, red} = require('kleur');
 const childProcess = require('child_process');
 
 const packageJson = require('./package.json');
@@ -9,15 +10,15 @@ commander.version(packageJson.version)
   .parse(process.argv);
 
 const logError = (message) => {
-  console.log(`[Error]: ${message}`);
+  console.log(red('[Error]'), `: ${message}`);
 }
 
 const logInfo = (message) => {
-  console.log(`[Start]: ${message}`);
+  console.log(blue('[Start]'), `: ${message}`);
 }
 
 const logSuccess = (message) => {
-  console.log(`[Done]: ${message}`);
+  console.log(green('[Done]'), `: ${message}`);
 }
 
 const options = {
