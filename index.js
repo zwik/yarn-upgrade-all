@@ -68,6 +68,7 @@ const options = {
   peerDependencies: '--peer',
 };
 
+// eslint-disable-next-line import/no-dynamic-require
 const packageJson = require(packagePath);
 let command = '';
 const elements = ['dependencies', 'devDependencies', 'peerDependencies'];
@@ -78,11 +79,11 @@ elements.forEach((element) => {
     const packages = Object.keys(packageJson[element]);
     let packageList = '';
 
-    packages.forEach((pkg) => {
+    packages.forEach((packageFromList) => {
       if (packageList.length) {
-        packageList += ` ${pkg}`;
+        packageList += ` ${packageFromList}`;
       } else {
-        packageList = pkg;
+        packageList = packageFromList;
       }
     });
 
