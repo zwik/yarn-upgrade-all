@@ -3,11 +3,13 @@
 
 const commander = require('commander');
 const { blue, green, red } = require('kleur');
+const path = require('path');
+const fs = require('fs');
 const childProcess = require('child_process');
 
-const packageJson = require('./package.json');
+const pkg = require('./package.json');
 
-commander.version(packageJson.version)
+commander.version(pkg.version)
   .option('-E, --exact', 'install exact version')
   .option('-T, --tilde', 'install most recent version with the same minor version');
 commander.on('--help', () => {
@@ -53,11 +55,20 @@ const addYarnOptions = (command) => {
   return tempCommand;
 };
 
+let packagePath = null;
+packagePath = path.resolve(process.cwd(), 'package.json');
+
+if (!fs.existsSync(packagePath)) {
+  logError('Cannot find package.json file in the current directory');
+  process.exit(1);
+}
+
 const options = {
   devDependencies: '--dev',
   peerDependencies: '--peer',
 };
 
+const packageJson = require(packagePath);
 let command = '';
 const elements = ['dependencies', 'devDependencies', 'peerDependencies'];
 elements.forEach((element) => {
