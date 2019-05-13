@@ -51,7 +51,7 @@ const addTilde = (command) => {
 
 const addYarnOptions = (command) => {
   let tempCommand = addExact(command);
-  tempCommand = addTilde(command);
+  tempCommand = addTilde(tempCommand);
   return tempCommand;
 };
 
