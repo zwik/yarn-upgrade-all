@@ -3,9 +3,16 @@
   "version": "0.0.10",
   "description": "This is a command line utility program to upgrade all the packages in your package.json to the latest version (potentially upgrading packages across major versions).",
   "main": "index.js",
-  "repository": "https://github.com/zwik/yarn-upgrade-all.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zwik/yarn-upgrade-all.git"
+  },
   "author": "Marcel van den Bosch <m.v.d.bosch@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/zwik/yarn-upgrade-all",
+  "bugs": {
+    "url": "https://github.com/zwik/yarn-upgrade-all/issues"
+  },
   "bin": {
     "yarn-upgrade-all": "./index.js"
   },
